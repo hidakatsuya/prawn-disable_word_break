@@ -1,5 +1,7 @@
 # Prawn::DisableWordBreak
 
+[![Test](https://github.com/hidakatsuya/prawn-disable_word_break/workflows/Test/badge.svg?branch=master)](https://github.com/hidakatsuya/prawn-disable_word_break/actions)
+
 Prawn::DisableWordBreak is an extension that disables word-breaking by character such as space and hyphen to [Prawn](https://github.com/prawnpdf/prawn).
 
 ## Installation
