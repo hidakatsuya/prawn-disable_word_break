@@ -40,6 +40,28 @@ require 'prawn/disable_word_break'
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+### Testing
+
+This project has two test types, each of which can be run with the following command:
+
+    $ bundle exec rake test:units
+    $ bundle exec rake test:pdf
+
+Or, both tests can be run below:
+
+    $ bundle exec rake test
+
+To run `test:pdf`, you need [diff-pdf](https://github.com/vslavik/diff-pdf). You can run by installing it or using a Docker container for testing.
+
+Here's how to run `test:pdf` in the Docker container:
+
+    $ docker build -t prawn-disable_word_wrap-dev .
+    $ docker run -v $PWD:/prawn-disable_word_wrap -it prawn-disable_word_wrap-dev bash
+
+    > /prawn-disable_word_break#
+    > /prawn-disable_word_break# bundle install
+    > /prawn-disable_word_break# bundle exec rake test:pdf
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/hidakatsuya/prawn-disable_word_break. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/hidakatsuya/prawn-disable_word_wrap/blob/master/CODE_OF_CONDUCT.md).

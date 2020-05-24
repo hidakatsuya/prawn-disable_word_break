@@ -7,4 +7,10 @@ Rake::TestTask.new('test:units') do |t|
   t.test_files = FileList['test/units/**/*_test.rb']
 end
 
-task test: 'test:units'
+Rake::TestTask.new('test:pdf') do |t|
+  t.libs << 'test'
+  t.libs << 'lib'
+  t.test_files = FileList['test/pdf/**/*_test.rb']
+end
+
+task test: %i( test:units test:pdf )
