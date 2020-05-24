@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require 'units/test_helper'
 
 class Prawn::DisableWordBreak::LineWrapWithoutWordBreakTest < Test::Unit::TestCase
   include TestHelper

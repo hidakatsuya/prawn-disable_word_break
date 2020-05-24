@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-$:.unshift File.expand_path('../lib', __dir__)
+$:.unshift File.expand_path('../../lib', __dir__)
 
 require 'prawn/disable_word_break'
 
@@ -9,7 +9,7 @@ require 'test/unit'
 
 module TestHelper
   def test_dir
-    @test_dir ||= Pathname.new(__dir__)
+    @test_dir ||= Pathname.new(__dir__).join('..')
   end
 
   def font_path(name)
