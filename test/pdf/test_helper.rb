@@ -6,3 +6,6 @@ require 'prawn/disable_word_break'
 
 require 'pathname'
 require 'test/unit'
+
+module TestHelper
+end

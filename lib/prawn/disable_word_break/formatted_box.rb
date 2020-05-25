@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative 'line_wrap_without_word_break'
+require_relative 'line_wrap'
 
 module Prawn
   module DisableWordBreak
     module FormattedBox
       def initialize(*)
         super
-        @line_wrap = LineWrapWithoutWordBreak.new
+        @line_wrap = DisableWordBreak::LineWrap.new
       end
     end
   end
