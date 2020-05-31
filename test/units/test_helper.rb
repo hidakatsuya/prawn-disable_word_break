@@ -8,12 +8,12 @@ require 'pathname'
 require 'test/unit'
 
 module TestHelper
-  def test_dir
-    @test_dir ||= Pathname.new(__dir__).join('..')
+  def root_dir
+    @test_dir ||= Pathname.new(__dir__)
   end
 
   def font_path(name)
-    test_dir.join('fonts').join(name)
+    root_dir.join('../fonts').join(name)
   end
 
   def create_pdf
