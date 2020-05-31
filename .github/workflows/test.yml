@@ -15,13 +15,13 @@ jobs:
           - 2.7.x
     steps:
     - uses: actions/checkout@v1
-    # - name: Set up diff-pdf
-    #   run: |
-    #     sudo apt-get update
-    #     sudo apt-get install make automake g++ libpoppler-glib-dev poppler-utils libwxgtk3.0-dev
-    #     git clone https://github.com/vslavik/diff-pdf.git -b v0.3 --depth 1 /tmp/diff-pdf-src
-    #     cd /tmp/diff-pdf-src
-    #     ./bootstrap && ./configure && make && sudo make install
+    - name: Set up diff-pdf
+      run: |
+        sudo apt-get update
+        sudo apt-get install make automake g++ libpoppler-glib-dev poppler-utils libwxgtk3.0-dev
+        git clone https://github.com/vslavik/diff-pdf.git -b v0.3 --depth 1 /tmp/diff-pdf-src
+        cd /tmp/diff-pdf-src
+        ./bootstrap && ./configure && make && sudo make install
     - name: Set up Ruby ${{ matrix.ruby_version }}
       uses: actions/setup-ruby@v1
       with:
