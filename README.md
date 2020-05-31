@@ -63,22 +63,22 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 This project has two test types, each of which can be run with the following command:
 
     $ bundle exec rake test:units
-    $ bundle exec rake test:pdf
+    $ bundle exec rake test:features
 
 Or, both tests can be run below:
 
     $ bundle exec rake test
 
-To run `test:pdf`, you need [diff-pdf](https://github.com/vslavik/diff-pdf). You can run by installing it or using a Docker container for testing.
+To run `test:features`, you need [diff-pdf](https://github.com/vslavik/diff-pdf). You can run by installing it or using a Docker container for testing.
 
-Here's how to run `test:pdf` in the Docker container:
+Here's how to run `test:features` in the Docker container:
 
     $ docker build -t prawn-disable_word_wrap-dev .
     $ docker run -v $PWD:/prawn-disable_word_wrap -it prawn-disable_word_wrap-dev bash
 
     > /prawn-disable_word_break#
     > /prawn-disable_word_break# bundle install
-    > /prawn-disable_word_break# bundle exec rake test:pdf
+    > /prawn-disable_word_break# bundle exec rake test:features
 
 ## Contributing
 
