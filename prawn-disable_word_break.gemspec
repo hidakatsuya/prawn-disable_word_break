@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Katsuya Hidaka']
   spec.email         = ['hidakatsuya@gmail.com']
 
-  spec.summary       = 'Disables word-breaking by character such as space and hyphen to Prawn'
-  spec.description   = 'Prawn::DisableWordBreak is an extension that disables word-breaking by character such as space and hyphen to Prawn'
+  spec.summary       = 'Adds a method to word-breaking by character such as space and hyphen to Prawn'
+  spec.description   = 'Prawn::DisableWordBreak is an extension that adds a method to disable word-breaking by character such as space and hyphen to Prawn'
   spec.homepage      = 'https://github.com/hidakatsuya/prawn-disable_word_break'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
