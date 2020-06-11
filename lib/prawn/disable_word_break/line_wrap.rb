@@ -3,15 +3,14 @@
 module Prawn
   module DisableWordBreak
     class LineWrap < Text::Formatted::LineWrap
+      private
+
+      attr_reader :word_break_disabled
+
       # Override
       def initialize_line(options)
         super
-
-        @disable_word_break = if options.key?(:disable_word_break)
-          options[:disable_word_break]
-        else
-          @document.word_break_disabled?
-        end
+        @word_break_disabled = @document.word_break_disabled?
       end
 
       # Override
@@ -22,19 +21,16 @@ module Prawn
           @newline_encountered = true
           false
         else
-          add_to_line(fragment)
+          if word_break_disabled
+            insert_fragment_without_word_break(fragment)
+          else
+            insert_fragment_with_word_break(fragment)
+          end
         end
       end
 
-      def add_to_line(fragment)
-        if @disable_word_break
-          add_to_line_without_word_wrap(fragment)
-        else
-          add_to_line_with_word_wrap(fragment)
-        end
-      end
-
-      def add_to_line_without_word_wrap(fragment)
+      def insert_fragment_without_word_break(fragment)
+        fragment = delete_invisible_chars(fragment)
         fragment_width = @document.width_of(fragment, kerning: @kerning)
 
         if @accumulated_width + fragment_width <= @width
@@ -49,9 +45,7 @@ module Prawn
         end
       end
 
-      # This is a part of the original #add_fragment_to_line method:
-      # https://github.com/prawnpdf/prawn/blob/master/lib/prawn/text/formatted/line_wrap.rb#L95-L117
-      def add_to_line_with_word_wrap(fragment)
+      def insert_fragment_with_word_break(fragment)
         tokenize(fragment).each do |segment|
           segment_width = if segment == zero_width_space(segment.encoding)
                             0
@@ -79,6 +73,16 @@ module Prawn
 
         fragment_finished(fragment)
         true
+      end
+
+      def delete_invisible_chars(fragment)
+        encoding = fragment.encoding
+
+        invisible_chars = [
+          soft_hyphen(encoding),
+          zero_width_space(encoding)
+        ].join
+        fragment.delete(invisible_chars)
       end
     end
   end

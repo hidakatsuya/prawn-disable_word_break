@@ -11,7 +11,7 @@ class Prawn::DisableWordBreak::LineWrapTest < Test::Unit::TestCase
     @line_wrap = Prawn::DisableWordBreak::LineWrap.new
   end
 
-  def self.test_keep_original_behavior(word_break_disabled:)
+  def self.test_keep_original_behavior
     sub_test_case 'keep original behavior' do
       setup { @pdf.font 'Helvetica' }
 
@@ -108,14 +108,15 @@ class Prawn::DisableWordBreak::LineWrapTest < Test::Unit::TestCase
       assert_equal "hello#{Prawn::Text::SHY}", text_line
     end
 
-    test_keep_original_behavior(word_break_disabled: false)
+    test_keep_original_behavior
   end
 
   sub_test_case 'word-breaking when disabled' do
+    setup { stub(@pdf).word_break_disabled? { true } }
+
     test 'does not break on space' do
       @arranger.format_array = [{ text: 'hello world' }]
       text_line = @line_wrap.wrap_line(
-        disable_word_break: true,
         arranger: @arranger,
         width: 50,
         document: @pdf
@@ -126,7 +127,6 @@ class Prawn::DisableWordBreak::LineWrapTest < Test::Unit::TestCase
     test 'does not break on zero-width space' do
       @arranger.format_array = [{ text: "hello#{Prawn::Text::ZWSP}world" }]
       text_line = @line_wrap.wrap_line(
-        disable_word_break: true,
         arranger: @arranger,
         width: 50,
         document: @pdf
@@ -137,7 +137,6 @@ class Prawn::DisableWordBreak::LineWrapTest < Test::Unit::TestCase
     test 'does not break on tab' do
       @arranger.format_array = [{ text: "hello\tworld" }]
       text_line = @line_wrap.wrap_line(
-        disable_word_break: true,
         arranger: @arranger,
         width: 50,
         document: @pdf
@@ -148,7 +147,6 @@ class Prawn::DisableWordBreak::LineWrapTest < Test::Unit::TestCase
     test 'does not break on hyphens' do
       @arranger.format_array = [{ text: 'hello-world' }]
       text_line = @line_wrap.wrap_line(
-        disable_word_break: true,
         arranger: @arranger,
         width: 50,
         document: @pdf
@@ -159,14 +157,23 @@ class Prawn::DisableWordBreak::LineWrapTest < Test::Unit::TestCase
     test 'does not break on soft hyphens' do
       @arranger.format_array = [{ text: "hello#{Prawn::Text::SHY}world" }]
       text_line = @line_wrap.wrap_line(
-        disable_word_break: true,
         arranger: @arranger,
         width: 50,
         document: @pdf
       )
-      assert_equal 'hellow', text_line
+      assert_equal 'hellowo', text_line
     end
 
-    test_keep_original_behavior(word_break_disabled: true)
+    test 'deletes invisible chars to ignore string width calculation' do
+      @arranger.format_array = [{ text: "begin#{Prawn::Text::SHY}#{Prawn::Text::ZWSP}end" }]
+      text_line = @line_wrap.wrap_line(
+        arranger: @arranger,
+        width: 200,
+        document: @pdf
+      )
+      assert_equal 'beginend', text_line
+    end
+
+    test_keep_original_behavior
   end
 end
