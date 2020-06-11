@@ -6,6 +6,7 @@ require 'prawn/disable_word_break'
 
 require 'pathname'
 require 'test/unit'
+require 'test/unit/rr'
 
 module TestHelper
   def root_dir
@@ -22,4 +23,3 @@ module TestHelper
     end
   end
 end
-
