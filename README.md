@@ -42,7 +42,7 @@ Prawn::Document.generate 'foo.pdf' do
   end
 
   word_break(false) do
-    # word-breaking is disabled here
+    # word-breaking is enabled here
     text_box 'text without word-breaking', at: [100, 100], width: 50, height: 50
   end
 
