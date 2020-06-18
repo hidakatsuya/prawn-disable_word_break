@@ -5,7 +5,7 @@
 
 Prawn::DisableWordBreak is an extension that adds a method to disable word-breaking by character such as space and hyphen to [Prawn](https://github.com/prawnpdf/prawn).
 
-![](doc/comparison-of-word-breaking.png)
+![](https://raw.githubusercontent.com/hidakatsuya/prawn-disable_word_break/master/doc/comparison-of-word-breaking.png)
 
 See [feature test](test/features/text_line_wrapping_test.rb) for details.
 
@@ -37,12 +37,12 @@ Prawn::Document.generate 'foo.pdf' do
   end
 
   word_break(true) do
-    # word-breaking is disabled here
+    # word-breaking is enabled here
     formatted_box [{ text: 'text without word-breaking' }], at: [100, 100], width: 50, height: 50
   end
 
   word_break(false) do
-    # word-breaking is enabled here
+    # word-breaking is disabled here
     text_box 'text without word-breaking', at: [100, 100], width: 50, height: 50
   end
 
