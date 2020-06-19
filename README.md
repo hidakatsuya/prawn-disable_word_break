@@ -80,12 +80,12 @@ To run `test:features`, you need [diff-pdf](https://github.com/vslavik/diff-pdf)
 
 Here's how to run `test:features` in the Docker container:
 
-    $ docker build -t prawn-disable_word_break-dev .
-    $ docker run -v $PWD:/prawn-disable_word_break:cached -it prawn-disable_word_break-dev bash
+    $ docker build -t prawn-disable_word_break:latest .
+    $ docker run -v $PWD:/src:cached -it prawn-disable_word_break bash
 
-    > /prawn-disable_word_break#
-    > /prawn-disable_word_break# bundle install
-    > /prawn-disable_word_break# bundle exec rake test:features
+    > /src#
+    > /src# bundle install
+    > /src# bundle exec rake test:features
 
 ## Contributing
 
