@@ -21,9 +21,10 @@ jobs:
         diff-pdf-version: 0.5
 
     - name: Set up Ruby ${{ matrix.ruby_version }}
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby_version }}
+
     - name: Build and test with Rake
       run: |
         gem install bundler
