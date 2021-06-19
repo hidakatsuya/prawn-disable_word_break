@@ -19,7 +19,7 @@ module Prawn
       end
 
       def word_break_disabled?
-        defined?(@word_break_disabled) ? @word_break_disabled : false
+        defined?(@word_break_disabled) ? @word_break_disabled : DisableWordBreak.config.default
       end
     end
   end

@@ -29,8 +29,10 @@ class Prawn::DisableWordBreak::DisablerTest < Test::Unit::TestCase
   test '#word_break_disabled?' do
     assert_false @pdf.word_break_disabled?
 
-    @pdf.instance_variable_set(:@word_break_disabled, true)
+    Prawn::DisableWordBreak.config.default = true
 
     assert_true @pdf.word_break_disabled?
+  ensure
+    Prawn::DisableWordBreak.config.default = false
   end
 end

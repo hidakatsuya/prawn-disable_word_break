@@ -51,6 +51,17 @@ Prawn::Document.generate 'foo.pdf' do
 end
 ```
 
+You can also set the default value for the setting:
+
+```ruby
+Prawn::DisableWordBreak.config.default = true; # false by default
+
+Prawn::Document.generate 'foo.pdf' do
+  # word-breaking is DISABLED here
+  formatted_box [{ text: 'text with word-breaking' }], at: [100, 100], width: 50, height: 50
+end
+```
+
 ## Supported Versions
 
 ### Ruby
