@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: Test on ruby ${{ matrix.ruby_version }}
+    name: Test on ruby ${{ matrix.ruby_version }} and ${{ matrix.prawn_version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -12,6 +12,12 @@ jobs:
           - 2.6
           - 2.7
           - 3.0
+        prawn_version:
+          - 2.3
+          - 2.4
+        exclude:
+          - ruby_version: 3.0
+            prawn_version: 2.3
 
     steps:
     - uses: actions/checkout@v1
@@ -25,8 +31,10 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby_version }}
 
-    - name: Build and test with Rake
+    - name: Install dependencies
       run: |
         gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rake test
+        bundle install --gemfile test/gemfiles/prawn-${{ matrix.prawn_version }}.gemfile --jobs 4 --retry 3
+
+    - name: Run tests
+      run: bundle exec rake test
