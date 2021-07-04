@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'Prawn::DisableWordBreak is an extension for Prawn that adds a method to disable word-breaking by character such as space and hyphen.'
   spec.homepage      = 'https://github.com/hidakatsuya/prawn-disable_word_break'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.6.0')
 
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^test/}) }
