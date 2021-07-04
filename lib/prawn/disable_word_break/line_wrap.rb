@@ -1,19 +1,12 @@
 # frozen_string_literal: true
 
-require 'forwardable'
-
 module Prawn
   module DisableWordBreak
     class LineWrap < Text::Formatted::LineWrap
-      extend Forwardable
-
       private
-
-      def_delegator :@document, :word_break_disabled?
 
       # Override
       def add_fragment_to_line(fragment)
-        return super(fragment) unless word_break_disabled?
         return super(fragment) if fragment == '' || fragment == "\n"
 
         insert_fragment_without_word_break(fragment)

@@ -14,7 +14,7 @@ See [feature test](test/features/text_line_wrapping_test.rb) for details.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'prawn-disable_word_break'
+gem 'prawn-disable_word_break', require: false
 ```
 
 And then execute:
@@ -29,37 +29,6 @@ Or install it yourself as:
 
 ```ruby
 require 'prawn/disable_word_break'
-
-Prawn::Document.generate 'foo.pdf' do
-  disable_word_break do
-    # word-breaking is disabled here
-    text_box 'text without word-breaking', at: [100, 100], width: 50, height: 50
-  end
-
-  word_break(true) do
-    # word-breaking is enabled here
-    formatted_box [{ text: 'text without word-breaking' }], at: [100, 100], width: 50, height: 50
-  end
-
-  word_break(false) do
-    # word-breaking is disabled here
-    text_box 'text without word-breaking', at: [100, 100], width: 50, height: 50
-  end
-
-  # word-breaking is enabled here
-  formatted_box [{ text: 'text with word-breaking' }], at: [100, 100], width: 50, height: 50
-end
-```
-
-You can also set the default value for the setting:
-
-```ruby
-Prawn::DisableWordBreak.config.default = true; # false by default
-
-Prawn::Document.generate 'foo.pdf' do
-  # word-breaking is DISABLED here
-  formatted_box [{ text: 'text with word-breaking' }], at: [100, 100], width: 50, height: 50
-end
 ```
 
 ## Supported Versions
@@ -78,25 +47,16 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ### Testing
 
-This project has two test types, each of which can be run with the following command:
-
-    $ bundle exec rake test:units
-    $ bundle exec rake test:features
-
-Or, both tests can be run below:
-
     $ bundle exec rake test
 
-To run `test:features`, you need [diff-pdf](https://github.com/vslavik/diff-pdf). You can run by installing it or using a Docker container for testing.
-
-Here's how to run `test:features` in the Docker container:
+To run the test, you need [diff-pdf](https://github.com/vslavik/diff-pdf). You can run by installing it or using a Docker container for testing.
 
     $ docker build -t prawn-disable_word_break:latest .
     $ docker run -v $PWD:/src:cached -it prawn-disable_word_break bash
 
     > /src#
     > /src# bundle install
-    > /src# bundle exec rake test:features
+    > /src# bundle exec rake test
 
 ## Contributing
 

@@ -2,7 +2,7 @@
 
 $:.unshift File.expand_path('../../lib', __dir__)
 
-require 'prawn/disable_word_break'
+require 'prawn'
 
 require 'pathname'
 require 'test/unit'
