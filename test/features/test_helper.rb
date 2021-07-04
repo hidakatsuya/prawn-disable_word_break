@@ -6,6 +6,7 @@ require 'prawn/disable_word_break'
 
 require 'pathname'
 require 'test/unit'
+require 'pdf_matcher/testing/test_unit_adapter'
 
 module TestHelper
   def assert_expected_pdf(test_name, pdf)
@@ -17,8 +18,7 @@ module TestHelper
 
     actual_pdf.binwrite(pdf)
 
-    assert_true system("diff-pdf --output-diff=#{diff_pdf} #{expect_pdf} #{actual_pdf}"),
-      "Not match #{expect_pdf.relative_path_from(root_dir)}. Check #{diff_pdf.relative_path_from(root_dir)} for details."
+    assert_match_pdf expect_pdf, actual_pdf, output_diff: diff_pdf
   end
 
   def root_dir
