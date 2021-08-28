@@ -51,12 +51,11 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 To run the test, you need [diff-pdf](https://github.com/vslavik/diff-pdf). You can run by installing it or using a Docker container for testing.
 
-    $ docker build -t prawn-disable_word_break:latest .
-    $ docker run -v $PWD:/src:cached -it prawn-disable_word_break bash
+    $ docker pull ghcr.io/hidakatsuya/ruby-with-diff-pdf:latest
+    $ docker run -v $PWD:/src:cached -it ghcr.io/hidakatsuya/ruby-with-diff-pdf bash
 
-    > /src#
-    > /src# bundle install
-    > /src# bundle exec rake test
+    > src# bundle install
+    > src# bundle exec rake test
 
 ## Contributing
 
