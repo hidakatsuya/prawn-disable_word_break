@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'prawn', '~> 2.3'
+  spec.add_runtime_dependency 'matrix', '~> 0.4'
+
   spec.add_development_dependency 'rake', '>= 0'
   spec.add_development_dependency 'test-unit', '>= 3.3.5'
   spec.add_development_dependency 'test-unit-rr', '>= 1.0.5'
