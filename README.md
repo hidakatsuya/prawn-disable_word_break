@@ -35,11 +35,11 @@ require 'prawn/disable_word_break'
 
 ### Ruby
 
-2.6, 2.7, 3.0
+3.0, 3.1, 3.2
 
 ### Prawn
 
-2.3+
+2.3, 2.4
 
 ## Development
 
