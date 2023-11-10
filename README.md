@@ -1,7 +1,7 @@
 # Prawn::DisableWordBreak
 
 [![Gem Version](https://badge.fury.io/rb/prawn-disable_word_break.svg)](https://badge.fury.io/rb/prawn-disable_word_break)
-[![Test](https://github.com/hidakatsuya/prawn-disable_word_break/workflows/Test/badge.svg?branch=master)](https://github.com/hidakatsuya/prawn-disable_word_break/actions)
+[![Test](https://github.com/hidakatsuya/prawn-disable_word_break/actions/workflows/test.yml/badge.svg)](https://github.com/hidakatsuya/prawn-disable_word_break/actions/workflows/test.yml)
 
 Prawn::DisableWordBreak is an extension that disables word-breaking by character such as space and hyphen to [Prawn](https://github.com/prawnpdf/prawn).
 
