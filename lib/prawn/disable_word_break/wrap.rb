@@ -6,9 +6,10 @@ module Prawn
   module DisableWordBreak
     module Wrap
       # override
-      def wrap(*)
-        @line_wrap = DisableWordBreak::LineWrap.new
+      def initialize(*)
         super
+
+        @line_wrap = DisableWordBreak::LineWrap.new
       end
     end
   end
