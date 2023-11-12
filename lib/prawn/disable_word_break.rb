@@ -1,9 +1,28 @@
 # frozen_string_literal: true
 
 require 'prawn'
+require 'forwardable'
 
 require_relative 'disable_word_break/version'
 require_relative 'disable_word_break/wrap'
 
-Prawn::Text::Box.extensions << Prawn::DisableWordBreak::Wrap
-Prawn::Text::Formatted::Box.extensions << Prawn::DisableWordBreak::Wrap
+module Prawn
+  module DisableWordBreak
+    extend Forwardable
+
+    Config = Struct.new(
+      # Sets the default value for the disable_word_break option. Default is false.
+      :default,
+
+      keyword_init: true
+    )
+
+    def self.config
+      @config ||= Config.new(default: false)
+    end
+  end
+end
+
+Prawn::DisableWordBreak::Wrap.tap do |mod|
+  Prawn::Text::Formatted::Wrap.prepend(mod) unless Prawn::Text::Formatted::Wrap.include?(mod)
+end
