@@ -14,7 +14,7 @@ See [feature test](test/features/text_line_wrapping_test.rb) for details.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'prawn-disable_word_break', require: false
+gem 'prawn-disable_word_break'
 ```
 
 And then execute:
