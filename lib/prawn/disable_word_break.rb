@@ -11,14 +11,14 @@ module Prawn
     extend Forwardable
 
     Config = Struct.new(
-      # Sets the default value for the disable_word_break option. Default is false.
+      # Sets the default value for the disable_word_break option. Default is true.
       :default,
 
       keyword_init: true
     )
 
     def self.config
-      @config ||= Config.new(default: false)
+      @config ||= Config.new(default: true)
     end
   end
 end

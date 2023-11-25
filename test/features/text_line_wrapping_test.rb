@@ -7,6 +7,8 @@ class TextLineWrappingTest < Test::Unit::TestCase
   include TestHelper
 
   test 'text line-wrapping' do
+    Prawn::DisableWordBreak.config.default = false
+
     pdf = Prawn::Document.new do |doc|
       doc.instance_eval(&renderer_on("DisabledWordBreak is disabled", disable_word_break_option: false))
 
