@@ -2,7 +2,7 @@
 
 module Prawn
   module DisableWordBreak
-    class LineWrap < Text::Formatted::LineWrap
+    class LineBreakAnywhere < Text::Formatted::LineWrap
       private
 
       # Override

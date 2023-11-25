@@ -1,18 +1,21 @@
 # frozen_string_literal: true
 
 require 'features/test_helper'
+require 'prawn/disable_word_break'
 
 class TextLineWrappingTest < Test::Unit::TestCase
   include TestHelper
 
   test 'text line-wrapping' do
     pdf = Prawn::Document.new do |doc|
-      doc.instance_eval(&renderer_on(word_break_disabled: false))
-
-      require 'prawn/disable_word_break'
+      doc.instance_eval(&renderer_on("DisabledWordBreak is disabled", disable_word_break_option: false))
 
       doc.start_new_page
-      doc.instance_eval(&renderer_on(word_break_disabled: true))
+      doc.instance_eval(&renderer_on("DisabledWordBreak is enabled", disable_word_break_option: true))
+
+      Prawn::DisableWordBreak.config.default = true
+      doc.start_new_page
+      doc.instance_eval(&renderer_on("DisabledWordBreak is enabled by config.default", disable_word_break_option: false))
     end
 
     assert_expected_pdf 'text_line_wrapping', pdf.render
@@ -20,14 +23,14 @@ class TextLineWrappingTest < Test::Unit::TestCase
 
   private
 
-  def renderer_on(word_break_disabled:)
+  def renderer_on(title, disable_word_break_option: false)
     font_dir = root_dir.join('../fonts')
     box_size = { width: 150, height: 50 }
 
     proc do
       font font_dir.join('DejaVuSans.ttf')
 
-      font_size(20) { text "Word-breaking is #{word_break_disabled ? 'disabled' : 'enabled' }" }
+      font_size(20) { text title }
       move_down 10
 
       text 'Spaces'
@@ -35,16 +38,16 @@ class TextLineWrappingTest < Test::Unit::TestCase
 
       text_for_spaces = 'aaaaaa bbbbbb cccccccccccccccc'
 
-      text_box "#text_box:\n#{text_for_spaces}", at: [0, cursor], **box_size
+      text_box "#text_box:\n#{text_for_spaces}", at: [0, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [0, cursor], *box_size.values }
 
-      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_spaces}" }], at: [180, cursor], **box_size
+      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_spaces}" }], at: [180, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [180, cursor], *box_size.values }
 
       bounding_box [360, cursor], **box_size do
-        text "#bounding_box:\n#{text_for_spaces}"
+        text "#bounding_box:\n#{text_for_spaces}", disable_word_break: disable_word_break_option
         stroke_bounds
       end
 
@@ -55,16 +58,17 @@ class TextLineWrappingTest < Test::Unit::TestCase
 
       text_for_tabs = "aaaaaa\tbbbbbb\tcccccccccccccccc"
 
-      text_box "#text_box:\n#{text_for_tabs}", at: [0, cursor], **box_size
+      text_box "#text_box:\n#{text_for_tabs}", at: [0, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [0, cursor], *box_size.values }
 
-      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_tabs}" }], at: [180, cursor], **box_size
+      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_tabs}" }],
+        at: [180, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [180, cursor], *box_size.values }
 
       bounding_box [360, cursor], **box_size do
-        text "#bounding_box:\n#{text_for_tabs}"
+        text "#bounding_box:\n#{text_for_tabs}", disable_word_break: disable_word_break_option
         stroke_bounds
       end
 
@@ -75,16 +79,17 @@ class TextLineWrappingTest < Test::Unit::TestCase
 
       text_for_hard_hyphens = 'aaaaaa-bbbbbb-cccccccccccccccc'
 
-      text_box "#text_box:\n#{text_for_hard_hyphens}", at: [0, cursor], **box_size
+      text_box "#text_box:\n#{text_for_hard_hyphens}", at: [0, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [0, cursor], *box_size.values }
 
-      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_hard_hyphens}" }], at: [180, cursor], **box_size
+      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_hard_hyphens}" }],
+        at: [180, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [180, cursor], *box_size.values }
 
       bounding_box [360, cursor], **box_size do
-        text "#bounding_box:\n#{text_for_hard_hyphens}"
+        text "#bounding_box:\n#{text_for_hard_hyphens}", disable_word_break: disable_word_break_option
         stroke_bounds
       end
 
@@ -96,16 +101,17 @@ class TextLineWrappingTest < Test::Unit::TestCase
       shy = Prawn::Text::SHY
       text_for_soft_hyphens = "aaaaaa#{shy}bbbbbb#{shy}cccccccccccccccc"
 
-      text_box "#text_box:\n#{text_for_soft_hyphens}", at: [0, cursor], **box_size
+      text_box "#text_box:\n#{text_for_soft_hyphens}", at: [0, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [0, cursor], *box_size.values }
 
-      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_soft_hyphens}" }], at: [180, cursor], **box_size
+      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_soft_hyphens}" }],
+        at: [180, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [180, cursor], *box_size.values }
 
       bounding_box [360, cursor], **box_size do
-        text "#bounding_box:\n#{text_for_soft_hyphens}"
+        text "#bounding_box:\n#{text_for_soft_hyphens}", disable_word_break: disable_word_break_option
         stroke_bounds
       end
 
@@ -118,16 +124,17 @@ class TextLineWrappingTest < Test::Unit::TestCase
       zwsp = Prawn::Text::ZWSP
       text_for_zwsp = "aaaaaa#{zwsp}bbbbbb#{zwsp}cccccccccccccccc"
 
-      text_box "#text_box:\n#{text_for_zwsp}", at: [0, cursor], **box_size
+      text_box "#text_box:\n#{text_for_zwsp}", at: [0, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [0, cursor], *box_size.values }
 
-      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_zwsp}" }], at: [180, cursor], **box_size
+      formatted_text_box [{ text: "#formatted_text_box:\n#{text_for_zwsp}" }],
+        at: [180, cursor], disable_word_break: disable_word_break_option, **box_size
 
       stroke { rectangle [180, cursor], *box_size.values }
 
       bounding_box [360, cursor], **box_size do
-        text "#bounding_box:\n#{text_for_zwsp}"
+        text "#bounding_box:\n#{text_for_zwsp}", disable_word_break: disable_word_break_option
         stroke_bounds
       end
 
@@ -137,16 +144,17 @@ class TextLineWrappingTest < Test::Unit::TestCase
       move_down 10
 
       font font_dir.join('ipag.ttf') do
-        text_box "#text_box:\nああああああああ-いいいいいいい", at: [0, cursor], **box_size
+        text_box "#text_box:\nああああああああ-いいいいいいい", at: [0, cursor], disable_word_break: disable_word_break_option, **box_size
 
         stroke { rectangle [0, cursor], *box_size.values }
 
-        formatted_text_box [{ text: "#formatted_text_box:\nああああああああ いいいいいいい" }], at: [180, cursor], **box_size
+        formatted_text_box [{ text: "#formatted_text_box:\nああああああああ いいいいいいい" }],
+          at: [180, cursor], disable_word_break: disable_word_break_option, **box_size
 
         stroke { rectangle [180, cursor], *box_size.values }
 
         bounding_box [360, cursor], **box_size do
-          text "#bounding_box:\nああああああああ#{zwsp}いいいいいいい"
+          text "#bounding_box:\nああああああああ#{zwsp}いいいいいいい", disable_word_break: disable_word_break_option
           stroke_bounds
         end
       end
