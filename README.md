@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/prawn-disable_word_break.svg)](https://badge.fury.io/rb/prawn-disable_word_break)
 [![Test](https://github.com/hidakatsuya/prawn-disable_word_break/actions/workflows/test.yml/badge.svg)](https://github.com/hidakatsuya/prawn-disable_word_break/actions/workflows/test.yml)
 
-Prawn::DisableWordBreak is an extension that disables word-breaking by character such as space and hyphen to [Prawn](https://github.com/prawnpdf/prawn).
+Prawn::DisableWordBreak is an extension to [Prawn](https://github.com/prawnpdf/prawn) that provides an option to disable line breaking on characters such as spaces and hyphens.
 
 ![](https://raw.githubusercontent.com/hidakatsuya/prawn-disable_word_break/master/doc/comparison-of-word-breaking.png)
 
@@ -29,6 +29,27 @@ Or install it yourself as:
 
 ```ruby
 require 'prawn/disable_word_break'
+```
+
+Or, you can set it for each method such as `text_box`.
+
+```ruby
+# Disable the default setting.
+Prawn::DisableWordBreak.config.default = false
+```
+
+```ruby
+Prawn::Document.generate "prawn.pdf" do
+  text_box "text",
+    at: [0, cursor], width: 150, height: 50, disable_word_break: true
+
+  formatted_text_box [{ text: "text" }],
+    at: [0, cursor], width: 150, height: 50, disable_word_break: true
+
+  bounding_box [0, cursor], width: 150, height: 50 do
+    text "text", disable_word_break: true
+  end
+end
 ```
 
 ## Supported Versions
