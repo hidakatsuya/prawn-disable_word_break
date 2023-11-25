@@ -7,7 +7,7 @@ module Prawn
 
       # Override
       def add_fragment_to_line(fragment)
-        return super(fragment) if fragment == '' || fragment == "\n"
+        return super(fragment) if fragment == "" || fragment == "\n"
 
         insert_fragment_without_word_break(fragment)
       end

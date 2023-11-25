@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'prawn'
-require 'forwardable'
+require "prawn"
+require "forwardable"
 
-require_relative 'disable_word_break/version'
-require_relative 'disable_word_break/wrap'
+require_relative "disable_word_break/version"
+require_relative "disable_word_break/wrap"
 
 module Prawn
   module DisableWordBreak
@@ -13,7 +13,6 @@ module Prawn
     Config = Struct.new(
       # Sets the default value for the disable_word_break option. Default is true.
       :default,
-
       keyword_init: true
     )
 

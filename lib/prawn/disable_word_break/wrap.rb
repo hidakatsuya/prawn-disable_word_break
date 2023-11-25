@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'line_break_anywhere'
+require_relative "line_break_anywhere"
 
 module Prawn
   module DisableWordBreak
@@ -14,7 +14,7 @@ module Prawn
 
       # override
       def valid_options
-        super + %i(disable_word_break)
+        super + %i[disable_word_break]
       end
     end
   end

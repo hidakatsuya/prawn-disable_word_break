@@ -1,10 +1,10 @@
-require 'bundler/gem_tasks'
-require 'rake/testtask'
+require "bundler/gem_tasks"
+require "rake/testtask"
 
-Rake::TestTask.new('test:features') do |t|
-  t.libs << 'test'
-  t.libs << 'lib'
-  t.test_files = FileList['test/features/**/*_test.rb']
+Rake::TestTask.new("test:features") do |t|
+  t.libs << "test"
+  t.libs << "lib"
+  t.test_files = FileList["test/features/**/*_test.rb"]
 end
 
-task test: %i( test:features )
+task test: %i[test:features]
