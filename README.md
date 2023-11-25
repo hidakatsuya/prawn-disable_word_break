@@ -78,6 +78,17 @@ To run the test, you need [diff-pdf](https://github.com/vslavik/diff-pdf). You c
     > src# bundle install
     > src# bundle exec rake test
 
+### Linting
+
+    $ bundle exec rake standard
+
+Or fix automatically.
+
+    $ bundle exec rake standard:fix
+
+See https://github.com/standardrb/standard for more details.
+
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/hidakatsuya/prawn-disable_word_break. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/hidakatsuya/prawn-disable_word_wrap/blob/master/CODE_OF_CONDUCT.md).
