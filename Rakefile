@@ -8,4 +8,10 @@ Rake::TestTask.new("test:features") do |t|
   t.test_files = FileList["test/features/**/*_test.rb"]
 end
 
-task test: %i[test:features]
+Rake::TestTask.new("test:units") do |t|
+  t.libs << "test"
+  t.libs << "lib"
+  t.test_files = FileList["test/units/**/*_test.rb"]
+end
+
+task test: %i[test:units test:features]
