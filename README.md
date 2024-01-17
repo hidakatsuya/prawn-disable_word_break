@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/prawn-disable_word_break.svg)](https://badge.fury.io/rb/prawn-disable_word_break)
 [![Test](https://github.com/hidakatsuya/prawn-disable_word_break/actions/workflows/test.yml/badge.svg)](https://github.com/hidakatsuya/prawn-disable_word_break/actions/workflows/test.yml)
 
-Prawn::DisableWordBreak is an extension to [Prawn](https://github.com/prawnpdf/prawn) that provides an option to disable line breaking on characters such as spaces and hyphens.
+Prawn::DisableWordBreak is a [Prawn](https://github.com/prawnpdf/prawn) extension that provides an option to disable line breaks for characters such as spaces and hyphens.
 
 ![](https://raw.githubusercontent.com/hidakatsuya/prawn-disable_word_break/master/doc/comparison-of-word-breaking.png)
 
