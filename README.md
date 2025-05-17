@@ -56,11 +56,11 @@ end
 
 ### Ruby
 
-3.0, 3.1, 3.2, 3.3
+3.2, 3.3, 3.4
 
 ### Prawn
 
-2.4
+2.4 or later
 
 ## Development
 
